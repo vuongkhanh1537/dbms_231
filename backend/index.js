@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"123456",
-    database: "test"
+    database: "db_btl"
 })
 
 app.use(express.json())
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 //Lấy danh sách toàn bộ các cuốn sách
 app.get("/books", (req, res) => {
-    const q = "SELECT * FROM test.books"
+    const q = "SELECT * FROM book"
     db.query(q,(err, data) => {
         if (err) return res.json(err)
         return res.json(data)
@@ -47,6 +47,22 @@ app.post("/books", (req, res) => {
     db.query(q, [values], (err, data) => {
         if (err) return res.json(err)
         return res.json("Book has been created");
+    })
+})
+
+app.post("/api/func/countSoldBook", (req, res) => {
+    const q = "SELECT countSoldBooks(?) AS data";
+    const values = [
+        req.body.BookId,
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data);
     })
 })
 
