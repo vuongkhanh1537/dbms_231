@@ -3,8 +3,9 @@ import Home from "./pages/Home";
 import { Books } from "./pages/Books";
 import { Function } from "./pages/Function";
 import { MostSold } from "./pages/MostSold";
-import { Procedure } from "./pages/Procedure";
+import { BillPrices } from "./pages/BillPrices";
 import { AbsentHours } from "./pages/AbsentHours";
+import { ShiftEmployees } from "./pages/ShiftEmployees";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
           <Route path="/books" element={<Books />} />
           <Route path="/function" element={<Function />} />
           <Route path="/mostsold" element={<MostSold />} />
-          <Route path="/procedure" element={<Procedure />} />
-          <Route path="/function2" element={<AbsentHours />} />
+          <Route path="/billprices" element={<BillPrices />} />
+          <Route path="/function2" element={<AbsentHours />} />          
+          <Route path="/shiftemployees" element={<ShiftEmployees />} />
         </Route>
       </Routes>
     </div>
