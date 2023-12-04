@@ -61,9 +61,43 @@ app.post("/api/func/countSoldBook", (req, res) => {
     console.log(req.body);
 
     db.query(q,[values], (err, data) => {
+        console.log(data);
         if (err) return res.json(err)
         return res.json(data);
     })
+})
+
+app.post("/api/func/calculateAbsentHours", (req, res) => {
+    const q = "SELECT calculateAbsentHours(?) AS data";
+    const values = [
+        req.body.EmployeeId,
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        console.log(data);
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/mostSoldBooks", (req, res) => {
+    const q = "CALL mostSoldBooks(?)";
+    const values = [
+        req.body.Number,
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    db.query(q,[values], (err, data) => {
+        console.log(data);
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+    
 })
 
 app.listen(8800, () => {

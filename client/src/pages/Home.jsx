@@ -15,6 +15,7 @@ function Home() {
             <Link to = "/books" className='nav-link'>Quản lý sách</Link>
             <Link to="/function" className='nav-link'>Quản lý hàm</Link>
             <Link to="/procedure" className='nav-link'>Quản lý thủ tục</Link>
+            <Link to="/mostsold" className='nav-link'>Tra sách bán chạy</Link>
             <Link to="/function2" className='nav-link'>Quản lý hàm 2</Link>
           </Nav>
         </Navbar.Collapse>
