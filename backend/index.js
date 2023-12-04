@@ -152,7 +152,88 @@ app.post("/api/prod/mostSoldBooks", (req, res) => {
         req.body.timeend,
     ];
 
-    db.query(q, [values], (err, data) => {
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        console.log(data);
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/calculateAbsentHours", (req, res) => {
+    const q = "SELECT calculateAbsentHours(?) AS data";
+    const values = [
+        req.body.EmployeeId,
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/mostSoldBooks", (req, res) => {
+    const q = "CALL mostSoldBooks(?)";
+    const values = [
+        req.body.Number,
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/shiftEmployees", (req, res) => {
+    const q = "CALL print_name_employee(?)";
+    const values = [
+        req.body.date,
+        req.body.shift
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        console.log(data);
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/billOutPrices", (req, res) => {
+    const q = "CALL print_bills_out_and_prices(?)";
+    const values = [
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data);
+    })
+})
+
+app.post("/api/func/billInPrices", (req, res) => {
+    const q = "CALL print_bills_in_and_prices(?)";
+    const values = [
+        req.body.timestart,
+        req.body.timeend,
+    ];
+
+    console.log(req.body);
+
+    db.query(q,[values], (err, data) => {
         if (err) return res.json(err)
         return res.json(data[0]);
     })

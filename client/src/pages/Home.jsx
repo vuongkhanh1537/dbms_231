@@ -14,8 +14,10 @@ function Home() {
           <Nav className="me-auto">
             <Link to = "/books" className='nav-link'>Quản lý sách</Link>
             <Link to="/function" className='nav-link'>Quản lý hàm</Link>
-            <Link to="/procedure" className='nav-link'>Quản lý thủ tục</Link>
-            <Link to="/function2" className='nav-link'>Quản lý hàm 2</Link>
+            <Link to="/billprices" className='nav-link'>Quản lý hóa đơn</Link>
+            <Link to="/mostsold" className='nav-link'>Tra sách bán chạy</Link>
+            <Link to="/function2" className='nav-link'>Tra giờ vắng</Link>
+            <Link to="/shiftemployees" className='nav-link'>Tra ca làm</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

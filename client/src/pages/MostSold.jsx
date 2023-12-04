@@ -5,15 +5,14 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import { countSoldBook } from '../services/FunctionServices';
-import Alert from 'react-bootstrap/Alert';
+import { mostSoldBooks } from '../services/MostSoldServices';
+import Table from 'react-bootstrap/Table';
 
-
-export const Function = () => {
+export const MostSold = () => {
 
   const [detail, setDetail] = useState({});
   const [show, setShow] = useState(false);
-  const [count, setCount] = useState(0);
+  const [books, setBooks] = useState([]);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -25,22 +24,21 @@ export const Function = () => {
   }
 
   const handleClick = async () => {
-    let res = await countSoldBook(detail);
-    console.log(res.data[0].data);
+    let res = await mostSoldBooks(detail);
     setShow(true);
-    setCount(res.data[0].data);
+    setBooks(res.data[0]);
   }
 
   return (<>
-    <h5>Tra cứu số lượng sách đã bán</h5> 
+    <h5>Tra cứu đầu sách bán chạy</h5> 
     <Box
       ml = "20px"
       sx={{ height: "fit-content", width: '90%'}}>
       <Form>
         <Row className="mb-3">
             <Form.Group as={Col}>
-            <Form.Label>Mã sách</Form.Label>
-            <Form.Control type="text" placeholder="Nhập mã sách" name="BookId" onChange={handleChange}/>
+            <Form.Label>Số lượng sách tra cứu</Form.Label>
+            <Form.Control type="text" placeholder="Nhập số sách" name="Number" onChange={handleChange}/>
             </Form.Group>
 
             <Form.Group as={Col} >
@@ -66,10 +64,24 @@ export const Function = () => {
             Tra cứu
         </Button>
       </Form>
-      <Alert variant="primary" show={show} >
-        Bạn bán được {count} cuốn sách trong khoảng thời gian trên
-      </Alert>
+      {show && (<Table variant="primary" striped  bordered hover>
+        <thead>
+          <tr>
+            <th>BookID</th>
+            <th>Tựa đề sách</th>
+            <th>Số lượng đã bán</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book) => (
+            <tr key={book.BookID}>
+              <td>{book.BookID}</td>
+              <td>{book.Title}</td>
+              <td>{book.NumberSold}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>)}
     </Box>
-    
   </>);
 }
